@@ -8,7 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pizzas")
@@ -18,16 +20,20 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    @Size(min = 2, message = "Name must contain at least 2 characters")
+    @NotBlank(message = "The name must not be blank, empty or null")
     private String name;
 
     @Lob
+    @Size(min = 10, max = 2000, message = "Description must contain at least 10 characters and not more than 2000")
+    @NotBlank(message = "The description field must not be blank, empty or null")
     private String description;
 
     @Lob
+    @Size(min = 10, max = 1000, message = "Image url must contain at least 10 characters and not more than 1000")
     private String imgUrl;
 
-    @NotNull
+    @NotNull(message = "Price cannot be null")
     private Double price;
 
 

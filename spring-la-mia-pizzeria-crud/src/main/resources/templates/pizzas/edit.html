@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza updating</title>
+
+    <th-block th:replace="~{ fragments/head :: head }"></th-block>
+</head>
+
+<body>
+
+    <header>
+        <nav th:replace="~{ fragments/navbar :: navbar }"></nav>
+    </header>
+
+    <main class="container">
+        <section class="upper row">
+            <div class="col-12 text-center">
+                <h1 class="fw-bold">
+                    Pizzas updating page
+                </h1>
+            </div>
+        </section>
+        <section class="pizzas-content">
+            <div class="col-12">
+                <h2 class="text-center mb-3">
+                    You are updating a new pizza
+                </h2>
+            </div>
+
+            <div class="col-12">
+                <form th:action="@{/pizzas/{id}(id=${pizza.id})}" method="POST" th:object="${pizza}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}"
+                            th:errorClass="is-invalid" required>
+
+                        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                            <ul>
+                                <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imageUrl" class="form-label">Image URL:</label>
+                        <input type="text" class="form-control" id="imgUrl" th:field="*{imgUrl}"
+                            th:errorClass="is-invalid" required>
+
+                        <div th:if="${#fields.hasErrors('imgUrl')}" class="invalid-feedback">
+                            <ul>
+                                <li th:each="error : ${#fields.errors('imgUrl')}" th:text="${error}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" th:field="*{price}" min="0" max="999"
+                            th:errorClass="is-invalid" required>
+
+                        <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+                            <ul>
+                                <li th:each="error : ${#fields.errors('price')}" th:text="${error}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea type="text" class="form-control" id="description" th:field="*{description}" rows="4"
+                            th:errorClass="is-invalid" required></textarea>
+
+                        <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+                            <ul>
+                                <li th:each="error : ${#fields.errors('description')}" th:text="${error}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button class="btn btn-primary" type="submit">Update pizza</button>
+                        <button class="btn btn-warning" type="reset">Reset fields</button>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}">
+    </footer>
+</body>
+
+</html>

@@ -8,7 +8,12 @@
     <th:block th:replace="~{fragments/head :: head}">
     </th:block>
 </head>
+
 <body>
+    <header>
+        <nav th:replace="~{ fragments/navbar :: navbar }"></nav>
+    </header>
+
     <main class="container">
         <section class="row upper">
             <div class="col-12 p-5 mb-3 text-center">

@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <header>
+        <nav th:replace="~{ fragments/navbar :: navbar }"></nav>
+    </header>
     <main class="container">
         <section class="upper">
             <div class="col-12">
@@ -38,7 +41,7 @@
                             <td th:text="*{price}" />
                             <td>
                                 <a th:href="@{/pizzas/{id}(id=*{id})}" class="btn btn-primary btn-sm">Show</a>
-                                <a th:href="@{/pizzas/{id}(id=*{id})}" class="btn btn-warning btn-sm">Edit</a>
+                                <a th:href="@{/pizzas/{id}/edit(id=*{id})}" class="btn btn-warning btn-sm">Edit</a>
                                 <a th:href="@{/pizzas/{id}(id=*{id})}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
